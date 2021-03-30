@@ -93,12 +93,12 @@ def xy_convert_format_to_point_dict(x,y):
 
 
 
-def nivo_plot_write_json(nivo_scatter_plot_groups, output_file):
+def nivo_plot_write_json(nivo_plot_groups, output_file):
 
     file_name = output_file
     fileM = open(file_name,'w')
     with open(file_name, 'w') as fileM:
-        json.dump(nivo_scatter_plot_groups, fileM)   
+        json.dump(nivo_plot_groups, fileM)   
 
 
 

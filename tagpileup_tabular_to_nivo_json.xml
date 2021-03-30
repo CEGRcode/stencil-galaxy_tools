@@ -5,7 +5,7 @@
 
     <command> 
         <![CDATA[
-        perl $__tool_directory__/tagpileup_tabular_to_nivo_json.pl   "$input_tabular_format_file"  '$output_json_format_file'
+        python $__tool_directory__/tagpileup_tabular_to_nivo_json.py   --input "$input_tabular_format_file"  --output '$output_json_format_file'
 ]]>
     </command>
     <inputs>
