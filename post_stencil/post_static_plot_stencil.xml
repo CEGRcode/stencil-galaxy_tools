@@ -1,0 +1,78 @@
+<tool id="post_static_plot_stencil" name="POST static plot to stencil" version="1.0.0">
+    <description></description>
+    <command>
+
+    <![CDATA[
+        #import time
+	#set non_ready_states = ['new', 'queued', 'running', 'setting_metadata', 'upload']
+	#set history_id = None
+        #set history_name = None
+        #set stderr = ''
+        #set tool_id = 'unknown'
+        #set tool_parameters = ''
+        #set workflow_step = None
+	#set a = 0
+	#set output_dir = $output.files_path
+	mkdir -p $output_dir
+	#for $i in $input
+	    #if history_id is None:
+                #set history_id = $__app__.security.encode_id($i.history.id)
+                #set history_name = $i.history.name
+            #end if
+	    #set job = $i.creating_job
+	    #set $a += 1
+            #set job_state = $job.state
+            #if $job_state == 'error':
+                #set stderr = $job.stderr
+            #end if
+            #set tool_id = $job.tool_id
+            #set tool_parameters = ""
+            #for $p in $job.parameters:
+                    #set tool_parameters = $tool_parameters + "__SeP__" + $p.name
+                    #set tool_parameters = $tool_parameters + "__SeP__" + $p.value
+            #end for
+            #if workflow_step is None:
+                #set pjaas = $job.post_job_actions
+                #for pjaa in $pjaas:
+                    #set pja = pjaa.post_job_action
+                    #set workflow_step = $pja.workflow_step
+                #end for
+            #end if
+            && python $__tool_directory__/post_static_plot_stencil.py
+	    --config_file $__tool_directory__/post_stencil_config.ini
+	    --input "$i"
+	    --input_id "$__app__.security.encode_id($i.id)"
+            --input_datatype "$i.ext"
+            --input_plottype "staticImage"
+            --dbkey "$i.metadata.dbkey"
+            --history_id "$history_id"
+            --history_name "$history_name"
+            --stats_tool_id "post_static_plot_stencil"
+	    --tool_id "$job.tool_id"
+	    --layout_id "$stencil_layout_name"
+	    --tabId "$a"
+	    --stepId '$stencil_stepId'
+	    --user_email "$__user_email__"
+            #if $workflow_step is not None:
+                --workflow_step_id "$__app__.security.encode_id($workflow_step.id)"
+	    #end if
+	    --output "$output_dir/$a"
+            && cat $output_dir/$a >> $output 
+	#end for
+        ]]>
+    </command>
+    <inputs>
+	    <param name="input" type="data_collection" collection_type="list" format="png" label="png input" />
+            <param name="stencil_stepId"      type="integer" value="0"      label="Desired position of plot within tab in Stencil" />	
+            <param name="stencil_layout_name"      type="text" value="sample layout"      label="Desired name of layout in Stencil" />
+    </inputs>
+    <outputs>
+        <data name="output" format="txt" />
+    </outputs>
+    <tests>
+    </tests>
+    <help>
+**What it does**
+
+    </help>
+</tool>
