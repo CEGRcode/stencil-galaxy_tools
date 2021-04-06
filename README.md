@@ -1,5 +1,6 @@
 # galaxy_tools_for_stencil
 
+preprocess tools:
 
 1- "deseq2_tabular_to_nivo_json" tool has the option to generate scatter plot and bar plot in nivo standard json format. 
 
@@ -7,6 +8,10 @@
 
 3- "motif_logo_memexml_to_pngs" tool generates meme logos in png format from memexml file. 
 
-4- "post_static_plot_stencil" tool POSTs static images in png format to Stencil
+4- "resize_4color_plot_png" tool resize the 4color plot.
 
-5- "post_nivo_plot_stencil" tool POSTs json files in nivo plot format to Stencil. Supported type of plots are scatterPlot, linePlot and barPlot.
+post tools:
+
+1- "post_static_plot_stencil" tool POSTs static images in png format to Stencil
+
+2- "post_nivo_plot_stencil" tool POSTs json files in nivo plot format to Stencil. Supported type of plots are scatterPlot, linePlot and barPlot.
