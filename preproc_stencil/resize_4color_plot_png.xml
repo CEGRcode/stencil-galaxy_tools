@@ -1,0 +1,37 @@
+<tool id="resize_4color_plot_png" name="reize 4color plot in png format" version="1.0.0">
+    <description>
+	
+    </description>
+
+    <command> 
+        <![CDATA[
+            python3 $__tool_directory__/resize_4color_plot_png.py 
+            -i $input_image
+            -r $rows
+            -c $cols
+            -o "tmp.png"
+            && sleep 120
+            && mv "tmp.png" $output_resized_image
+        ]]>
+    </command>
+    
+    <inputs>
+        <param name="input_image" type="data" format="png" label=" name of the 4color plot" />
+        <param name="rows" type="integer" value="600" label="number of pixels in rows" />	
+        <param name="cols" type="integer" value="200" label="number of pixels in columns" />	
+
+    </inputs>
+
+    <outputs>
+        <data name="output_resized_image" type="data" format="png"  label="${tool.name} on ${on_string}"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+        **What it does**
+        This script will compress a PNG file using INTER_AREA interpolation.
+    </help>
+
+</tool>
