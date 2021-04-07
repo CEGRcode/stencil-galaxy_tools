@@ -10,7 +10,6 @@
             -r $rows
             -c $cols
             -o "tmp.png"
-            && sleep 120
             && mv "tmp.png" $output_resized_image
         ]]>
     </command>
