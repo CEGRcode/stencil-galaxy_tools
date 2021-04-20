@@ -1,11 +1,11 @@
-<tool id="resize_4color_plot_png" name="reize 4color plot in png format" version="1.0.0">
+<tool id="resize_4color_plot" name="resize 4color plot in png format" version="1.0.0">
     <description>
 	
     </description>
 
     <command> 
         <![CDATA[
-            python3 $__tool_directory__/resize_4color_plot_png.py 
+            python3 $__tool_directory__/resize_4color_plot.py 
             -i $input_image
             -r $rows
             -c $cols
@@ -30,7 +30,7 @@
 
     <help>
         **What it does**
-        This script will compress a PNG file using INTER_AREA interpolation.
+        This script will compress and resize a PNG file using INTER_AREA interpolation.
     </help>
 
 </tool>

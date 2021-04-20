@@ -2,10 +2,10 @@
 ## The output is tailored for nivo visualizer software used by Stencil website.
 ## The tool currently can provide MA plot which is a sacatter plot and distribution of Adjusted P Values as bar plot.
 
-import csv 
 import argparse
 import time
-import json
+
+import preproc_util_stencil 
 
 class Deseq2_Tabular_Row:
     def __init__ (self):
@@ -28,7 +28,7 @@ def main():
     parser.add_argument('--output' , dest='output_file', required=True, help='Desired name of output file')
     args = parser.parse_args()
     print (" process started ..." )
-    parsed_deseq2_tabular = Parse_tabular_file(args.deseq2_tabular)
+    parsed_deseq2_tabular = preproc_util_stencil.Parse_tabular_file(args.deseq2_tabular)
     print ("deseq2 tabular file parsed" )
     extracted_deseq2_tabular_rows= Extract_deseq2_tabular_rows(parsed_deseq2_tabular)
     print ("deseq2 tabular rows extracted" )
@@ -42,7 +42,7 @@ def main():
         for i in range(nivo_scatter_plot_num_groups):
             nivo_scatter_plot_groups.append(nivo_scatter_plot_group_maker(data, i))  
         
-        nivo_plot_write_json(nivo_scatter_plot_groups, args.output_file)
+        preproc_util_stencil.Nivo_plot_write_json(nivo_scatter_plot_groups, args.output_file)
         print ("deseq2 tabular rows written" )
 
     elif (args.plottype == 'bar_plot'):
@@ -51,17 +51,10 @@ def main():
         name_column = 'p_adj_value'
         sorted_column= extract_sorted_column(extracted_deseq2_tabular_rows)
         nivo_bar_plot = nivo_extract_bar_plot(num_bins, sorted_column, name_column)
-        nivo_plot_write_json(nivo_bar_plot, args.output_file)
+        preproc_util_stencil.Nivo_plot_write_json(nivo_bar_plot, args.output_file)
 
     else:
         print ('please enter valid plot type')
-
-def Parse_tabular_file(file_name):
-    with open(file_name) as data:                                                                                          
-        data_reader = csv.reader(data, delimiter='\t')
-        raw_data = list (data_reader)
-    return raw_data
-
 
 def Extract_deseq2_tabular_rows(parsed_deseq2_tabular):
     na_counter = 0 ## to count the lines which are not parsed because have "NA" value. 
@@ -84,28 +77,10 @@ def Extract_deseq2_tabular_rows(parsed_deseq2_tabular):
 
 
 
-def xy_convert_format_to_point_dict(x,y):
-    point_dict_format = {}
-    point_dict_format["x"] = x
-    point_dict_format["y"] = y
-    return (point_dict_format)
-
-
-
-
-def nivo_plot_write_json(nivo_plot_groups, output_file):
-
-    file_name = output_file
-    fileM = open(file_name,'w')
-    with open(file_name, 'w') as fileM:
-        json.dump(nivo_plot_groups, fileM)   
-
-
-
 def nivo_scatter_plot_data_maker(deseq2_tabular_rows):
     data=[]
     for deseq2_tabular_row in deseq2_tabular_rows: 
-        data.append(xy_convert_format_to_point_dict(deseq2_tabular_row.base_mean,deseq2_tabular_row.log2_fc))
+        data.append(preproc_util_stencil.Xy_convert_format_to_point_dict(deseq2_tabular_row.base_mean, deseq2_tabular_row.log2_fc))
     return(data)
 
 

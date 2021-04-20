@@ -1,4 +1,4 @@
-<tool id="tagpileup_tabular_to_json" name="Tagpileup Format From Tabular To JSON" version="1.0.0">
+<tool id="tagpileup_tabular_to_json" name="tagpileup tabular output to nivo json" version="1.0.0">
 	<description>
 	convert output of tagpileup from tabular format to JSON format
 </description>

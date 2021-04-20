@@ -34,8 +34,8 @@ if __name__ == '__main__':
 
 	#default figure width/height is defined by matrix size
 	#if user-defined size is smaller than matrix, activate rebin function
-    #row_num = 600
-    #col_num = 200
+    row_num = 600
+    col_num = 200
 
     for opt in optlist:
         if opt[0] == "-h":

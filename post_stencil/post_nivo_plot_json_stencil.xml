@@ -122,6 +122,7 @@
             <option value="scatterPlot" selected="True">Scatter plot</option>
             <option value="linePlot" >Line plot</option>
             <option value="barPlot" >Bar plot</option>
+            <option value="heatMap" >Heat Map</option>
 	</param>
         <param name="stencil_stepId"      type="integer" value="0"      label="Desired position of plot within tab in Stencil" />	
         <param name="stencil_layout_name"      type="text" value="sample layout"      label="Desired name of layout in Stencil" />
@@ -136,5 +137,7 @@
 **What it does**
 
 
+A JSON dictionary containing the run, sample, url of the output and genome reference is sent via a POST
+to the STENCIL REST API where the information is stored and visualized.
     </help>
 </tool>

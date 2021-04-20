@@ -1,7 +1,7 @@
-import csv 
 import argparse
 import time
-import json
+
+import preproc_util_stencil
 
 class Tagpileup_Tabular_Info:
     def __init__ (self):
@@ -24,13 +24,13 @@ def main():
     parser.add_argument('--output' , dest='output_file', required=True, help='Desired name of output file')
     args = parser.parse_args()
     print (" process started ..." )
-    parsed_tagpileup_tabular = Parse_tabular_file(args.tagpileup_tabular)
+    parsed_tagpileup_tabular = preproc_util_stencil.Parse_tabular_file(args.tagpileup_tabular)
     extracted_tagpileup_tabular_info = Extract_tagpileup_tabular_info(parsed_tagpileup_tabular)
 
     nivo_line_plot_groups_dict = []
     nivo_line_plot_groups_dict.append(nivo_line_plot_group_maker(extracted_tagpileup_tabular_info, 'sense', "hsl(240,100%,50%)"))
     nivo_line_plot_groups_dict.append(nivo_line_plot_group_maker(extracted_tagpileup_tabular_info, 'antisense', "hsl(0, 100%, 50%)"))
-    Nivo_plot_write_json(nivo_line_plot_groups_dict, args.output_file)
+    preproc_util_stencil.Nivo_plot_write_json(nivo_line_plot_groups_dict, args.output_file)
 
 def Extract_tagpileup_tabular_info(parsed_tagpileup_tabular):
     
@@ -67,10 +67,10 @@ def nivo_line_plot_group_maker(tagpileup_tabular_info, group_id, group_color):
     nivo_line_plot_group = Nivo_Line_Plot_Group(group_id, group_color)
     if (group_id == 'sense'):
         for i in range(len(tagpileup_tabular_info.x)): 
-            nivo_line_plot_group.data.append(xy_convert_format_to_point_dict(tagpileup_tabular_info.x[i],tagpileup_tabular_info.sense[i]))
+            nivo_line_plot_group.data.append(preproc_util_stencil.Xy_convert_format_to_point_dict(tagpileup_tabular_info.x[i],tagpileup_tabular_info.sense[i]))
     elif (group_id == 'antisense'):
         for i in range(len(tagpileup_tabular_info.x)): 
-           nivo_line_plot_group.data.append(xy_convert_format_to_point_dict(tagpileup_tabular_info.x[i],tagpileup_tabular_info.antisense[i]))
+           nivo_line_plot_group.data.append(preproc_util_stencil.Xy_convert_format_to_point_dict(tagpileup_tabular_info.x[i],tagpileup_tabular_info.antisense[i]))
     else:
         print (' this code is just for sense and antisense group id ')
     
@@ -80,25 +80,6 @@ def nivo_line_plot_group_maker(tagpileup_tabular_info, group_id, group_color):
     nivo_line_plot_group_dict["data"] = nivo_line_plot_group.data
 
     return(nivo_line_plot_group_dict)
-
-def xy_convert_format_to_point_dict(x,y):
-    point_dict_format = {}
-    point_dict_format["x"] = round(float(x),4)
-    point_dict_format["y"] = round(float(y),4)
-    return (point_dict_format)
-
-def Parse_tabular_file(file_name):
-    with open(file_name) as data:                                                                                          
-        data_reader = csv.reader(data, delimiter='\t')
-        raw_data = list (data_reader)
-    return raw_data
-
-def Nivo_plot_write_json(nivo_plot_groups, output_file):
-
-    file_name = output_file
-    fileM = open(file_name,'w')
-    with open(file_name, 'w') as fileM:
-        json.dump(nivo_plot_groups, fileM)   
 
 
 

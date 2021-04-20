@@ -1,4 +1,4 @@
-<tool id="post_static_plot_stencil" name="POST static plot to stencil" version="1.0.0">
+<tool id="post_static_plot_stencil" name="POST static plot in png or svg format to stencil" version="1.0.0">
     <description></description>
     <command>
 
@@ -62,9 +62,9 @@
         ]]>
     </command>
     <inputs>
-	    <param name="input" type="data_collection" collection_type="list" format="png" label="png input" />
+	    <param name="input" type="data_collection" collection_type="list" format="png,svg" label="png or svg input" />
             <param name="stencil_stepId"      type="integer" value="0"      label="Desired position of plot within tab in Stencil" />	
-            <param name="stencil_layout_name"      type="text" value="sample layout"      label="Desired name of layout in Stencil" />
+            <param name="stencil_layout_name"      type="text" value="sample layout"      label="Desired name of layout in Stencil. No space is allowed in the layout name" />
     </inputs>
     <outputs>
         <data name="output" format="txt" />
