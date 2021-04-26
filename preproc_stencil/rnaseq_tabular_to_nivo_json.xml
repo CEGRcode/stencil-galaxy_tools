@@ -1,12 +1,12 @@
-<tool id="deseq2_tabular_to_nivo_json" name="deseq2 tabular output to nivo json" version="1.0.0">
+<tool id="rnaseq_tabular_to_nivo_json" name="rnaseq tabular output to nivo json" version="1.0.0">
 	<description>
-	convert output of deseq2 from tabular format to nivo json format
 </description>
 
     <command> 
         <![CDATA[
-     python3 $__tool_directory__/deseq2_tabular_to_nivo_json.py 
+     python3 $__tool_directory__/rnaseq_tabular_to_nivo_json.py 
      --input "$input_tabular_format_file"
+     --source "$input_file_source"
      --plottype $plottype
      --output  $output_json_format_file
 
@@ -17,7 +17,12 @@
         <param name="plottype" type="select" label="Type of Nivo plot json file needs to be generated">
                 <option value="scatter_plot" selected="True">Scatter plot</option>
                 <option value="bar_plot" >Bar plot</option>
-            </param>
+	</param>
+
+       <param name="input_file_source" type="select" label="source of input file">
+                <option value="deseq2" selected="True">deseq2</option>
+                <option value="cuffdiff" >cuffdiff</option>
+       </param>
 
 </inputs>
 
@@ -29,7 +34,7 @@
     <help>
 **What it does**
 
-This tool convert output of deseq2 to nivo JSON format to be used by Nivo plot.
+This tool convert output of rnaseq data, coming from deseq2 or cuffdiff, to nivo JSON format.
     </help>
 
 </tool>

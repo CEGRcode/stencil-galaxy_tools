@@ -2,7 +2,7 @@
 
 preprocess tools:
 
-1- "deseq2_tabular_to_nivo_json" tool has the option to generate scatter plot and bar plot in nivo standard json format. 
+1- "rnaseq_tabular_to_nivo_json" tool has the option to generate scatter plot and bar plot in nivo standard json format. The input can come from deseq2 or cuffdiff tool. 
 
 2- "deseq2_normalized_counts_to_heatmap_nivo_json" tool has the option to generate scatter plot and bar plot in nivo standard json format. 
 
