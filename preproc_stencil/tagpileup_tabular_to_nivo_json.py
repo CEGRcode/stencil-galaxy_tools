@@ -24,13 +24,15 @@ def main():
     parser.add_argument('--output' , dest='output_file', required=True, help='Desired name of output file')
     args = parser.parse_args()
     print (" process started ..." )
-    parsed_tagpileup_tabular = preproc_util_stencil.Parse_tabular_file(args.tagpileup_tabular)
+    parsed_tagpileup_tabular = preproc_util_stencil.Parse_tabular_file(args.tagpileup_tabular, num_skipped_rows = 0)
     extracted_tagpileup_tabular_info = Extract_tagpileup_tabular_info(parsed_tagpileup_tabular)
 
     nivo_line_plot_groups_dict = []
     nivo_line_plot_groups_dict.append(nivo_line_plot_group_maker(extracted_tagpileup_tabular_info, 'sense', "hsl(240,100%,50%)"))
     nivo_line_plot_groups_dict.append(nivo_line_plot_group_maker(extracted_tagpileup_tabular_info, 'antisense', "hsl(0, 100%, 50%)"))
-    preproc_util_stencil.Nivo_plot_write_json(nivo_line_plot_groups_dict, args.output_file)
+    
+    nivo_line_plot_options = preproc_util_stencil.Nivo_Line_Plot_Options() 
+    preproc_util_stencil.Nivo_plot_write_json(nivo_line_plot_groups_dict, nivo_line_plot_options, args.output_file)
 
 def Extract_tagpileup_tabular_info(parsed_tagpileup_tabular):
     

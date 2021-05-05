@@ -28,7 +28,7 @@ def Matrices_data_to_heatmap_nivo_json(number_matrix, conditions, hsl_matrix = N
     nivo_heatmap_plot_groups = []
     for i in range(len(conditions)):
         nivo_heatmap_plot_group = {}
-        nivo_heatmap_plot_group["conditions"] = str(conditions[i])
+        nivo_heatmap_plot_group["samples"] = str(conditions[i])
         for j in range(len(conditions)):
             nivo_heatmap_plot_group[ str(conditions[j])] = round(float(number_matrix[i][j]),3)
             if hsl_matrix is not None: 
@@ -62,8 +62,10 @@ def main():
         nivo_heatmap_plot_groups = Matrices_data_to_heatmap_nivo_json(number_matrix, conditions, hsl_matrix)
     else:
         nivo_heatmap_plot_groups = Matrices_data_to_heatmap_nivo_json(number_matrix, conditions)
-    
-    preproc_util_stencil.Nivo_plot_write_json(nivo_heatmap_plot_groups, args.output_file)
+
+
+    nivo_heatmap_plot_options = preproc_util_stencil.Nivo_Heatmap_Plot_Options(conditions) 
+    preproc_util_stencil.Nivo_plot_write_json(nivo_heatmap_plot_groups, nivo_heatmap_plot_options, args.output_file)
 
 
 if __name__ == "__main__":
