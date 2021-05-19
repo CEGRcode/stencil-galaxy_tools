@@ -1,0 +1,40 @@
+<tool id="deseq2_pca_plot" name="deseq2 PCA plot generator" version="1.0.0">
+    <description>
+	
+    </description>
+
+    <requirements>
+	    <requirement type="package" version="1.22.1">bioconductor-deseq2</requirement>
+</requirements>
+    <version_command><![CDATA[
+echo $(R --version | grep version | grep -v GNU)", DESeq2 version" $(R --vanilla --slave -e "library(DESeq2); cat(sessionInfo()\$otherPkgs\$DESeq2\$Version)" 2> /dev/null | grep -v -i "WARNING: ")
+    ]]></version_command>
+
+    <command> 
+           <![CDATA[
+		    Rscript $__tool_directory__/deseq2_pca_plot.R  $input "output_tmp.json"
+		    && python3 $__tool_directory__/add_nivo_plot_options_pca.py 
+                    --input "output_tmp.json"
+                    --output  $output
+
+                         
+        ]]>
+
+    </command>
+    
+    <inputs>
+		    <param name="input" type="data" label=" name of log normalized counts file, output of deseq2 " /> -->
+    </inputs>
+
+    <outputs>
+        <data name="output" type="data" format="json"  label="${tool.name} on ${on_string}"/>
+    </outputs>
+    
+    <tests>
+    </tests>
+    
+    <help>
+**What it does**
+    </help>
+</tool>
+

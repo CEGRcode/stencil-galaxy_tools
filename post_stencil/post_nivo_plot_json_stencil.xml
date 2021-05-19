@@ -121,7 +121,7 @@
         <param name="plottype" type="select" label="Type of Nivo plot like to be POST to Stencil">
             <option value="scatterPlot" selected="True">Scatter plot</option>
             <option value="linePlot" >Line plot</option>
-            <option value="barPlot" >Bar plot</option>
+            <option value="barchart" >Bar plot</option>
             <option value="heatMap" >Heat Map</option>
 	</param>
         <param name="stencil_stepId"      type="integer" value="0"      label="Desired position of plot within tab in Stencil" />	

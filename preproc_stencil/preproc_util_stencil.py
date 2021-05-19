@@ -1,7 +1,6 @@
 import csv 
 import json
 import math
-import numpy as np
 
 
 class Nivo_General_Plot_Options:
@@ -11,6 +10,36 @@ class Nivo_General_Plot_Options:
         self.axisRight = {}
         self.axisBottom = {'orient':'bottom', 'tickSize':5, 'tickPadding':5, 'tickPadding':5, 'tickRotation':0, 'legend':'X-Axis', 'legendPosition':'middle', 'legendOffset': 46}
         self.axisLeft =   {'orient':'bottom', 'tickSize':5, 'tickPadding':5, 'tickPadding':5, 'tickRotation':0, 'legend':'Y-Axis', 'legendPosition':'middle', 'legendOffset': -60}
+
+class Nivo_Scatter_Plot_Options_Pca(Nivo_General_Plot_Options):
+     
+    def __init__(self, x_min, x_max, y_min, y_max):
+        Nivo_General_Plot_Options.__init__(self)
+        x_min_linear = Cal_linear_scale_limit (x_min)
+        x_max_linear = Cal_linear_scale_limit (x_max)
+        y_min_linear = Cal_linear_scale_limit (y_min)
+        y_max_linear = Cal_linear_scale_limit (y_max)
+        x_linear_scale_ticks = Cal_linear_scale_ticks (x_min_linear, x_max_linear)
+        y_linear_scale_ticks = Cal_linear_scale_ticks (y_min_linear, y_max_linear)
+        self.Update_general_plot_options_pca(x_linear_scale_ticks,y_linear_scale_ticks)
+        
+        self.xScale = {'type': 'linear' , 'min':x_min_linear, 'max': x_max_linear}
+        self.yScale = {'type': 'linear' , 'min':y_min_linear, 'max': y_max_linear}
+        #xFormat
+        #yFormat
+        self.blendMode = 'multiply'
+        self.colors = {'scheme': 'nivo'}
+        self.legends = { 'anchor': 'bottom-right', 'direction': 'column', 'justify': False, 'translateX': 130, 'translateY': 0, 'itemWidth': 100, 'itemHeight': 12, 'itemsSpacing': 5, 'itemDirection': 'left-to-right', 'symbolSize': 12, 'symbolShape': 'circle', 'effects': { 'on': 'hover' , 'style': {'itemOpacity': 1} }}
+    
+    def Update_general_plot_options_pca(self, x_scale_ticks, y_scale_ticks):
+        self.axisTop['legend'] = 'PCA−plot for Treatment k562 vs HepG2 cell line'
+        
+        self.axisBottom['legend'] = 'PC1'
+        self.axisBottom['tickValues'] = x_scale_ticks
+        self.axisLeft['legend'] = 'PC2'
+        self.axisLeft['legendOffset'] = -40
+        self.axisLeft['tickValues'] = y_scale_ticks
+        self.margin  = {'top':40, 'right':60, 'bottom':70, 'left':60 }
 
 class Nivo_Scatter_Plot_Options(Nivo_General_Plot_Options):
      
@@ -43,7 +72,9 @@ class Nivo_Scatter_Plot_Options(Nivo_General_Plot_Options):
         self.axisLeft['tickValues'] = y_linear_scale_ticks
         self.margin  = {'top':40, 'right':60, 'bottom':70, 'left':60 }
 
-    
+ 
+
+
 
 class Nivo_Bar_Plot_Options:
     def __init__ (self, indexBy, keys):
