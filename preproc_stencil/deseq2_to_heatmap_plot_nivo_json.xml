@@ -1,4 +1,4 @@
-<tool id="deseq2_normalized_counts_to_heatmap_nivo_json" name="deseq2 normalized counts output to heatmap nivo json" version="1.0.0">
+<tool id="deseq2_to_heatmap_plot_nivo_json.xml" name="deseq2 output to heatmap plot in nivo json format" version="1.0.0">
     <description>
 	
     </description>
@@ -9,7 +9,7 @@
     
     <command> 
         <![CDATA[
-             python3 $__tool_directory__/deseq2_normalized_counts_to_heatmap_nivo_json.py 
+             python3 $__tool_directory__/deseq2_to_heatmap_plot_nivo_json.py 
              --input "$input_tabular_format_file"
              --color_code "no"
              --output  $output_json_format_file
@@ -18,7 +18,7 @@
     </command>
     
     <inputs>
-        <param name="input_tabular_format_file" type="data" label=" name of normalized counts file, output of deseq2 " />
+        <param name="input_tabular_format_file" type="data" label=" name of log normalized counts file, output of deseq2 " />
     </inputs>
 
     <outputs>
@@ -29,7 +29,10 @@
     </tests>
     
     <help>
-**What it does**
+	    **What it does**
+
+		    This tool gets the output of deseq2 as input and generates json data for heatmap plot suitable to be visualized by Nivo Visulaizer. 
+
     </help>
 </tool>
 

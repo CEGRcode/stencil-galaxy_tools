@@ -110,12 +110,12 @@ def get_config_settings(config_file, section='defaults'):
     return d
 
 
-def get_datasets(config_file, ids, datatypes, plottypes, tool_id, workflow_step_id, layoutId, tabId, stepId):
+def get_datasets(config_file, ids, datatypes, post_types, tool_id, workflow_step_id, layoutId, tabId, stepId):
     # URL sample: http://localhost:8763/datasets/eca0af6fb47bf90c/display/?preview=True
     defaults = get_config_settings(config_file, section='defaults')
     d = {}
     counter = 0
-    for i, t, p in zip(listify(ids), listify(datatypes), listify(plottypes)):
+    for i, t, p in zip(listify(ids), listify(datatypes), listify(post_types)):
         counter += 1
         d['id'] = i
         d['URL'] = '%s/datasets/%s/display?preview=False' % (defaults['GALAXY_BASE_URL'], i) ## name of the key changed from uri to URL
@@ -125,7 +125,7 @@ def get_datasets(config_file, ids, datatypes, plottypes, tool_id, workflow_step_
             d['dataType'] = p    ## added for stencil
         else:
             d['dataType'] = t    ## added for stencil
-        d['plotType'] = p  ## key-value pair added 
+        d['plotType'] = p  ## key-value pair added ## the key name needs to be updated since table info is posted as well.
         d['layoutId'] = layoutId  ## key-value pair added
         d['tabId'] = 'Tab_' + str(tabId) 
         d['stepId'] = stepId  #workflow_step_id  ## key-value pair added

@@ -1,0 +1,32 @@
+<tool id="deseq2_to_table_with_gene_name_nivo_json" name="deseq2 output to table with gene name in nivo json format" version="1.0.0">
+	<description>
+</description>
+
+    <command> 
+        <![CDATA[
+     python3 $__tool_directory__/deseq2_to_table_with_gene_name_nivo_json.py 
+     --annotation "$input_gff_file"
+     --deseq $input_tabular_file
+     --output  $output_json
+
+]]>
+    </command>
+    <inputs>
+        <param name="input_tabular_file" type="data" format = "tabular" label=" name of tabular file coming out of deseq2" />
+        <param name="input_gff_file" type="data" format = "gff" label=" name of the reference genome annotation file in gff format" />
+
+</inputs>
+
+    <outputs>
+        <data name="output_json" type="data" format="json"  label="${tool.name} on ${on_string}"/>
+    </outputs>
+    <tests>
+    </tests>
+    <help>
+**What it does**
+
+This tool adds a gene name correspond to each gene_ID to the output of deseq2 and reformat it to json. The json format is sutiable to be visulaized by Nivo visulaizer.
+    </help>
+
+</tool>
+

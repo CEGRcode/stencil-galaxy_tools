@@ -1,0 +1,29 @@
+<tool id="cuffdiff_to_ma_plot_nivo_json" name="cuffdiff output to MA plot in nivo json format" version="1.0.0">
+	<description>
+</description>
+
+    <command> 
+        <![CDATA[
+     python3 $__tool_directory__/cuffdiff_to_ma_plot_nivo_json.py 
+     --input "$input_tabular_format_file"
+     --output  $output_json_format_file
+
+]]>
+    </command>
+    <inputs>
+        <param name="input_tabular_format_file" type="data" label=" name of tabular file " />
+</inputs>
+
+    <outputs>
+        <data name="output_json_format_file" type="data" format="json"  label="${tool.name} on ${on_string}"/>
+    </outputs>
+    <tests>
+    </tests>
+    <help>
+**What it does**
+
+		    This tool gets the output of cuffdiff as input and generates json data for MA plot suitable to be visualized by Nivo Visulaizer. 
+    </help>
+
+</tool>
+

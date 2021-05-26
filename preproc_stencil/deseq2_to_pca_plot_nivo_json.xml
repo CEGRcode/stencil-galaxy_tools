@@ -1,4 +1,4 @@
-<tool id="deseq2_pca_plot" name="deseq2 PCA plot generator" version="1.0.0">
+<tool id="deseq2_to_pca_plot_nivo_json" name="deseq2 output to pca plot in nivo json format" version="1.0.0">
     <description>
 	
     </description>
@@ -12,7 +12,7 @@ echo $(R --version | grep version | grep -v GNU)", DESeq2 version" $(R --vanilla
 
     <command> 
            <![CDATA[
-		    Rscript $__tool_directory__/deseq2_pca_plot.R  $input "output_tmp.json"
+		    Rscript $__tool_directory__/deseq2_to_pca_plot_nivo_json.R  $input "output_tmp.json"
 		    && python3 $__tool_directory__/add_nivo_plot_options_pca.py 
                     --input "output_tmp.json"
                     --output  $output
@@ -34,7 +34,9 @@ echo $(R --version | grep version | grep -v GNU)", DESeq2 version" $(R --vanilla
     </tests>
     
     <help>
-**What it does**
+	    **What it does**
+
+		    This tool gets the output of deseq2 as input and generates json data for PCA plot suitable to be visualized by Nivo Visulaizer. 
     </help>
 </tool>
 
