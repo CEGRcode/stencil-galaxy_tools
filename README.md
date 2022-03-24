@@ -25,14 +25,14 @@
 
     2- "post_nivo_table_and_plot_stencil" POSTs json files in nivo table or plot format to Stencil. Supported type of plots are ScatterPlot, LinePlot, BarPlot, Heatmap and Table.
 
-## Installing Stencil tool to Galaxy
+## Installing Stencil Galaxy tools 
 1. Clone the repository in the local_tools folder
 ```
 cd /mnt/mountpoint/srv/galaxy/local_tools
 sudo git clone https://github.com/CEGRcode/stencil-galaxy_tools
 ```
 
-2. Tell galaxy where to look for `stencil-galaxy_tools` tools by adding the following section to `/mnt/mountpoint/srv/galaxy/config/local_tool_conf.xml` file.
+2. Tell galaxy where to look for `stencil-galaxy_tools` tools by adding the following section to `/mnt/mountpoint/srv/galaxy/config/local_tool_conf.xml` file if it is not already included.
 
 ```
 <section id="STENCIL" name="STENCIL" >
