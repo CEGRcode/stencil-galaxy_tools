@@ -1,4 +1,7 @@
-# galaxy_tools_for_stencil #
+# About stencil-galaxy_tools #
+
+This repository contains galaxy tools for preprocessing and posting static and interactive plots and tables from Galaxy to Stencil. Preprocessing tools are mainly developed for deseq2, a popular RNA-seq analysis tool. The Post tools are generic and can be used for different static and interactive plots to Stencil Website.
+
 
 ## preprocess tools: ##
 
@@ -25,7 +28,8 @@
 
    2- "post_nivo_table_and_plot_stencil" POSTs json files in nivo table or plot format to Stencil. Supported type of plots are ScatterPlot, LinePlot, BarPlot, Heatmap and Table.
 
-## Installing Stencil Galaxy tools 
+
+## Installing Stencil Galaxy tools ##
 1. Clone the repository in the local_tools folder
 ```
 cd /mnt/mountpoint/srv/galaxy/local_tools
